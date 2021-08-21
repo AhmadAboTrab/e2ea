@@ -1,0 +1,4 @@
+class AbstractBill {
+  String id;
+  
+}

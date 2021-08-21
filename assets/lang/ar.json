@@ -1,0 +1,85 @@
+{
+
+
+    "mainScreenTitleAppbar": "السصفحة الرئيسية",
+
+    "showDetielsclacBox": "عرض تفاصيل الصندوق",
+    "newACCOUNT": "إنشاء حساب جديد",
+    "DeleteAccount": "حذف حساب",
+    "jareddMonthly": "جرد شهري",
+    "jarddYear": "جرد سنوي",
+    "EnteringCost": "إدخال التكاليف",
+    "addOrupdateMed": "إضافة أو تعديل دواء",
+
+
+    "SearchByEmployee": "البحث عن موظف",
+    "SearchBy_TradMed": "الاسم التجاري للدواء",
+    "SearchBy_ScientificMed": "الاسم العلمي للدواء",
+    "SearchBy..": "المركب الكميائي ",
+
+    "calcBox": "حساب الصندوق اليوم",
+    "buyMed": "شراء الأدوية",
+    "saleMed": "بيع أدوية",
+    "backBill": "إرجاع فاتورة أو دواء ",
+
+    "titleAlertDialoge": "شرح عن  عمل الزر",
+    "ُExplainCalcBox": "هذا الخيار يسمح بحساب إجمالي الصندوق من بداية اليوم إلى حين الضغط على الزر",
+    "ExplainBuyMed": "هـذا الخيار للقيام بإدخال فاتورة الشراء المتضمنة جميع المستحضرات التي ستدخل للصيدلية في هذا اليوم ",
+    "ExplainSaleMed": "إدخال فاتورة المبيع",
+    "ExpalinBackBill": "ما بعرف ",
+
+
+    "titleAppBarCategoryMed": "تصنيفات الأدوية",
+    "QuantityAvailable": "الكمية المتوفرة",
+    "Price": "السعر",
+    "hintTextSearchField": "بحث",
+    "indecators": "الاستعمالات",
+    "notUses": "يحذر أن يعطى ل :",
+    "warnings": "تحذيرات ",
+
+
+    "مسكنات الآلم وخافضات الحرارة": "Pain killers and heat relievers",
+    "مضاد وزمة": "Anti - edema",
+    "مستحضرات  تجميل": "Cosmetics",
+    "أدوية الجهاز التنفسي": "Respiratory Medicines",
+
+    "َQuantityNotAvailalbe": "َالكمية غير متاحة",
+    "NeedPrescription": "دير بالك بدو وصفة طبية ، إذا معو كبيس أوك ",
+    "contentPrescription": "اذا بدك تعرف ليش. .... كبيس كبسة طويلة",
+    "ifQuantityIsOver": "لقد نفـذت الكمية الموجودة في الصيدلية ، إن كنت متأكد من خياراتك سوف يتم إضافة الكمية المحددة وسوف يتم تذكيرك بنفاذ الكمية الرجاء اضغط على الأيقونة ليتم إضافة الدواء ،كميته للفاتورة",
+    "ifQuantityZero": "لأن الكمية صفر , لا يمكن إضافة هذا المنتج",
+    "CloseButton": "إغلاق",
+    "OkayButton": "موافق",
+
+    "selectLang": "اختر لغة التطبيق",
+    "Lang_1": "عربي",
+    "Lang_2": "انكليزي",
+    "LogoutButton": "تسجيل الخروج",
+
+
+    "______________________comment3___________________________": "Register Page",
+    "titilePage": "تسجيل بيانات موظف جديد",
+    "headPage": "الرجاء املأ بيانات الموظف الجديد",
+    "filedName": "اسم الموظف",
+    "fieledPhone": "رقم الهاتف",
+    "sex": "الجنس",
+    "sexMale": "ذكر",
+    "sexFemale": "أنثى",
+    "constantSalary": "راتب ثابت",
+    "enterSalary": "أدخل الراتب",
+    "cantEnter": "لا تسطيع الإدخال",
+    "HoureSalary": "الراتب حسب ساعات العمل",
+    "numberOfHours": "عدد ساعات العمل",
+    "CostOfHour": "سعر الساعة",
+    "emailFiled": "البريد الالكتروني",
+    "passwordField": "كلمة المرور",
+    "registerButton": "تسجيل الحساب",
+
+
+
+
+    "____________comment5______________": "Editing Page",
+    "titleAppbarEditiingPage": "تعديل أو إضافة "
+
+
+}
