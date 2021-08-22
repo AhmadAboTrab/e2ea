@@ -44,6 +44,9 @@ dependencies:
   path_provider: ^2.0.2
   open_file: ^3.2.1
   pdf: ^3.4.2
+  permission_handler: ^8.1.4+2
+  image_picker: ^0.8.2
+  firebase_storage: ^10.0.1
   flutter_localizations: 
     sdk: flutter
     version: ^0.0.0

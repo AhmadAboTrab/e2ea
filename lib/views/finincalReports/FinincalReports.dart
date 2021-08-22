@@ -1,3 +1,4 @@
+import 'package:e2ea/Controller/reports.dart';
 import 'package:e2ea/Widgets/BottomNavTab.dart';
 import 'package:flutter/material.dart';
 
@@ -15,6 +16,8 @@ class FinincalReports extends StatefulWidget {
   DateTime firstDateMonthly = new DateTime(0, 0, 0, 0, 0, 0),
       secondDateMonthly = new DateTime(0, 0, 0, 0, 0, 0);
   String whatController;
+
+  List resultFinincalSearch = [];
 
   @override
   _FinincalReportsState createState() => _FinincalReportsState();
@@ -183,7 +186,13 @@ class _FinincalReportsState extends State<FinincalReports> {
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: Colors.black)),
                         child: MaterialButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            widget.resultFinincalSearch = await Reports()
+                                .makeDayReport(
+                                    widget.pickedDate.day,
+                                    widget.pickedDate.month,
+                                    widget.pickedDate.year);
+                          },
                           child: Text('Get'),
                         ),
                       ),
@@ -216,7 +225,13 @@ class _FinincalReportsState extends State<FinincalReports> {
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: Colors.black)),
                         child: MaterialButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            widget.resultFinincalSearch = await Reports()
+                                .makeDayReport(
+                                    widget.pickedDate.day,
+                                    widget.pickedDate.month,
+                                    widget.pickedDate.year);
+                          },
                           child: Text('Get'),
                         ),
                       ),
@@ -261,7 +276,11 @@ class _FinincalReportsState extends State<FinincalReports> {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.black)),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      widget.resultFinincalSearch = await Reports()
+                          .makeMonthReport(widget.firstDateMonthly.month,
+                              widget.firstDateMonthly.year);
+                    },
                     child: Text('Get'),
                   ),
                 ),
@@ -306,7 +325,10 @@ class _FinincalReportsState extends State<FinincalReports> {
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.black)),
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      // widget.resultFinincalSearch = await Reports()
+                      //     .makeYearReport(widget.firstDateMonthly.year);
+                    },
                     child: Text('Get'),
                   ),
                 ),
@@ -318,12 +340,94 @@ class _FinincalReportsState extends State<FinincalReports> {
     );
 
     ///total sell
-    var totalSell = Row(
-      children: [
-        Icon(Icons.arrow_upward, color: Colors.green),
-        SizedBox(width: widget.mediaQueryData.size.width * 0.02),
-        Text('f')
-      ],
+    var totalSell = Positioned(
+      top: widget.mediaQueryData.size.height * 0.55,
+      left: widget.mediaQueryData.size.width * 0.015,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(Icons.arrow_upward, color: Colors.green),
+          SizedBox(width: widget.mediaQueryData.size.width * 0.04),
+          Text(
+            'total Sell',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            width: widget.mediaQueryData.size.width * 0.42,
+          ),
+          //result[0]
+          Text('number SY', style: TextStyle(color: Colors.green)),
+        ],
+      ),
+    );
+
+    ///total Buy
+    var totalBuy = Positioned(
+      top: widget.mediaQueryData.size.height * 0.65,
+      left: widget.mediaQueryData.size.width * 0.015,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(Icons.arrow_downward, color: Colors.green),
+          SizedBox(width: widget.mediaQueryData.size.width * 0.04),
+          Text(
+            'total Buy',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            width: widget.mediaQueryData.size.width * 0.42,
+          ),
+          //result[1]
+
+          Text('number SY', style: TextStyle(color: Colors.green)),
+        ],
+      ),
+    );
+
+    ///losses
+    var losses = Positioned(
+      top: widget.mediaQueryData.size.height * 0.75,
+      left: widget.mediaQueryData.size.width * 0.015,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(Icons.trending_down, color: Colors.red),
+          SizedBox(width: widget.mediaQueryData.size.width * 0.04),
+          Text(
+            'losses',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            width: widget.mediaQueryData.size.width * 0.47,
+          ),
+          //result[2]
+
+          Text('number SY', style: TextStyle(color: Colors.red)),
+        ],
+      ),
+    );
+
+    ///pr
+    var profits = Positioned(
+      top: widget.mediaQueryData.size.height * 0.85,
+      left: widget.mediaQueryData.size.width * 0.015,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Icon(Icons.trending_up, color: Colors.green),
+          SizedBox(width: widget.mediaQueryData.size.width * 0.04),
+          Text(
+            'profits',
+            style: TextStyle(fontWeight: FontWeight.w700),
+          ),
+          SizedBox(
+            width: widget.mediaQueryData.size.width * 0.47,
+          ),
+          //result[3]
+
+          Text('number SY', style: TextStyle(color: Colors.green)),
+        ],
+      ),
     );
 
     ///
@@ -335,6 +439,10 @@ class _FinincalReportsState extends State<FinincalReports> {
       body: Stack(
         children: [
           backGroundBoard,
+          totalSell,
+          totalBuy,
+          profits,
+          losses,
           widget.daily && !widget.monthly && !widget.yearly
               ? finincalDaily
               : !widget.daily && widget.monthly && !widget.yearly

@@ -1,3 +1,4 @@
+import 'package:e2ea/Controller/ImagePicker.dart';
 import 'package:flutter/material.dart';
 
 class AddMed extends StatefulWidget {
@@ -10,8 +11,17 @@ class AddMed extends StatefulWidget {
 class _AddMedState extends State<AddMed> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: null,
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => imagepicker()));
+              },
+              icon: Icon(Icons.add))
+        ],
+      ),
     );
   }
 }

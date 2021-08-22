@@ -1,5 +1,3 @@
-
-
 import '../models/quantity.dart';
 
 class Product extends Object {
@@ -19,6 +17,7 @@ class Product extends Object {
   int indexing;
   List composition;
   int basicQuantity;
+  String urlImage;
 
   Quantity quantity;
   Product.product();
@@ -40,6 +39,7 @@ class Product extends Object {
     this.sideReactions,
     this.warnings,
     this.precautions,
+    this.urlImage,
   });
   Map<String, dynamic> toJson() => {
         'id': this.id,
@@ -58,5 +58,6 @@ class Product extends Object {
         'sideReactions': this.sideReactions,
         'warnings': this.warnings,
         'precautions': this.precautions,
+        'urlImage':this.urlImage,
       };
 }

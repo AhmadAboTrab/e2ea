@@ -1,5 +1,6 @@
-import '../../Controller/Api/Search/EmployeeSearch/EmployeeSearchByEmail.dart';
+import 'package:e2ea/HelpedClassesForCreateTables/addMed.dart';
 
+import '../../Controller/Api/Search/EmployeeSearch/EmployeeSearchByEmail.dart';
 
 import '../../models/employee.dart';
 
@@ -62,7 +63,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: mediaQuery.size.height * 0.001,
                       ),
-                      Container(child: new Image.asset("assets/images/gr1.jpg")),
+                      Container(
+                          child: new Image.asset("assets/images/gr1.jpg")),
                       SizedBox(
                         height: mediaQuery.size.height * 0.07,
                       ),
@@ -112,86 +114,90 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       MaterialButton(
                         onPressed: () async {
-                          if (formKey.currentState.validate()) {
-                            print(email.text + " " + password.text);
-                            try {
-                              await auth.signInWithEmailAndPassword(
-                                  email: email.text, password: password.text);
-          
-                              result = 'correct';
-                            } on FirebaseAuthException catch (exception) {
-                              // print(exception.code);
-                              switch (exception.code) {
-                                case 'user-not-found':
-                                  {
-                                    result = 'user-not-found';
-                                    break;
-                                  }
-                                case 'wrong-password':
-                                  {
-                                    result = 'wrong-password';
-                                    break;
-                                  }
-                                case 'network-request-failed':
-                                  {
-                                    result = 'network-request-failed';
-                                    break;
-                                  }
-                                default:
-                                  {
-                                    result = 'undefined';
-                                    break;
-                                  }
-                              }
-                            }
-                          } //if validation email and password
-                          if (result == 'correct') {
-                            List temp = await EmployeeSearchByEmail()
-                                .getUserSugesstions(email.text);
-                            if (temp == null) {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        title: Text('Warning'),
-                                        content:
-                                            Text('this employee is not there '),
-                                        actions: [
-                                          MaterialButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text('okay'),
-                                          )
-                                        ],
-                                      ));
-                            }
-                            Employee employee = temp[0];
-          
-                            Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => MainScreen(
-                                  employee: employee,
-                                ),
-                              ),
-                            );
-                          } else {
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                content: Text(result),
-                                actions: [
-                                  // ignore: deprecated_member_use
-                                  RaisedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop(false);
-                                    },
-                                    child: Text("close"),
-                                  )
-                                ],
-                              ),
-                            ); //show dialog function
-                          }
+                                  builder: (context) => AddMed()));
+                          // if (formKey.currentState.validate()) {
+                          //   print(email.text + " " + password.text);
+                          //   try {
+                          //     await auth.signInWithEmailAndPassword(
+                          //         email: email.text, password: password.text);
+
+                          //     result = 'correct';
+                          //   } on FirebaseAuthException catch (exception) {
+                          //     // print(exception.code);
+                          //     switch (exception.code) {
+                          //       case 'user-not-found':
+                          //         {
+                          //           result = 'user-not-found';
+                          //           break;
+                          //         }
+                          //       case 'wrong-password':
+                          //         {
+                          //           result = 'wrong-password';
+                          //           break;
+                          //         }
+                          //       case 'network-request-failed':
+                          //         {
+                          //           result = 'network-request-failed';
+                          //           break;
+                          //         }
+                          //       default:
+                          //         {
+                          //           result = 'undefined';
+                          //           break;
+                          //         }
+                          //     }
+                          //   }
+                          // } //if validation email and password
+                          // if (result == 'correct') {
+                          //   List temp = await EmployeeSearchByEmail()
+                          //       .getUserSugesstions(email.text);
+                          //   if (temp == null) {
+                          //     showDialog(
+                          //         context: context,
+                          //         builder: (context) => AlertDialog(
+                          //               title: Text('Warning'),
+                          //               content:
+                          //                   Text('this employee is not there '),
+                          //               actions: [
+                          //                 MaterialButton(
+                          //                   onPressed: () {
+                          //                     Navigator.pop(context);
+                          //                   },
+                          //                   child: Text('okay'),
+                          //                 )
+                          //               ],
+                          //             ));
+                          //   }
+                          //   Employee employee = temp[0];
+
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => MainScreen(
+                          //         employee: employee,
+                          //       ),
+                          //     ),
+                          //   );
+                          // } else {
+                          //   showDialog(
+                          //     context: context,
+                          //     builder: (context) => AlertDialog(
+                          //       content: Text(result),
+                          //       actions: [
+                          //         // ignore: deprecated_member_use
+                          //         RaisedButton(
+                          //           onPressed: () {
+                          //             Navigator.of(context).pop(false);
+                          //           },
+                          //           child: Text("close"),
+                          //         )
+                          //       ],
+                          //     ),
+                          //   ); //show dialog function
+                          // }
                         },
                         height: mediaQuery.size.height * 0.08,
                         minWidth: double.infinity,

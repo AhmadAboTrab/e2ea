@@ -146,11 +146,16 @@ class BodyAddedPage extends StatelessWidget {
 
               showDialog(
                   context: context,
-                  builder: (context) => AlertDialoge(
-                      title:
-                          "تمت إضافةالدواء بنجاح هل تود العودة للصفحة الرئيسية أم البقاء ؟",
-                      descriptions: "dhfskjdfhsdkjfhsdjkfh",
-                      text: "fsdfsdfsdf"));
+                  builder: (context) => AlertDialog(
+                        title: Text('تم اضافة الفاتورة بنجاح'),
+                        actions: [
+                          MaterialButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('Go To Home'))
+                        ],
+                      ));
             },
             child: Container(
                 margin: EdgeInsets.all(2),
@@ -222,7 +227,7 @@ class BodyAddedPage extends StatelessWidget {
               AddNewProductOrUpdate().updateInformation(product);
               showDialog(
                   context: context,
-                  builder: (context) =>AlertDialoge(
+                  builder: (context) => AlertDialoge(
                       title:
                           "تمت إضافةالدواء بنجاح هل تود العودة للصفحة الرئيسية أم البقاء ؟",
                       descriptions: "dhfskjdfhsdkjfhsdjkfh",

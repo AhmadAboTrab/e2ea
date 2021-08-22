@@ -3,9 +3,11 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:e2ea/Controller/search/allSearch.dart';
 
-import 'package:e2ea/Controller/Api/deleteFromFirebase.dart';
-import 'package:e2ea/Widgets/AlertDialoge.dart';
-import 'package:e2ea/views/finincalReports/FinincalReports.dart';
+import '../../../Controller/Api/deleteFromFirebase.dart';
+import '/Widgets/AlertDialoge.dart';
+import 'package:e2ea/views/Register/Register.dart';
+import '../../../views/finincalReports/FinincalReports.dart';
+import '../../../views/quantityInverntory/quantityInventory.dart';
 
 import '../../../models/employee.dart';
 
@@ -27,10 +29,7 @@ import '../../../views/AddOrUpdateToMed/AddOrUpdateToMed.dart';
 import '../../../views/DeleteAccount/deleteAccount.dart';
 import '../../../views/EnteringCosts/EnteringCosts.dart';
 import '../../../views/PageMedicins/PageMedicins.dart';
-import '../../../views/screen_PopUpMenu/MonthyInventory.dart';
-import '../../../views/screen_PopUpMenu/YearInventory.dart';
-import '../../../views/screen_PopUpMenu/createAccount.dart';
-import '../../../views/screen_PopUpMenu/detailsOfBox.dart';
+
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -303,7 +302,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
         DemoLocalizations.of(context).translate('showDetielsclacBox')) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => DetailsOfBox()),
+        MaterialPageRoute(builder: (context) => FinincalReports()),
       );
       return;
     }
@@ -311,7 +310,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CreateAccount(),
+          builder: (context) => Register(),
         ),
       );
       return;
@@ -344,7 +343,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MonthlyInventory(),
+          builder: (context) => QuantityInvernotry(),
         ),
       );
 

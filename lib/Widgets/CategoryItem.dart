@@ -341,7 +341,9 @@ class _CategoryItemState extends State<CategoryItem>
               width: widget.mediaQueryData.size.width * 0.13,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(pathToImage),
+                    image: widget.product.urlImage != null
+                        ? NetworkImage(widget.product.urlImage)
+                        : AssetImage("assets/images/notFound.png"),
                     fit: BoxFit.fill,
                   ),
                   shape: BoxShape.rectangle),
@@ -491,9 +493,7 @@ class _CategoryItemState extends State<CategoryItem>
                           ),
                         );
                       } else {
-                      
-                          widget.counter++;
-                        
+                        widget.counter++;
                       }
                     });
                   },

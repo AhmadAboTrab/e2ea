@@ -33,6 +33,7 @@ class AbstractSearch implements SearchApi {
           product.ifCanUseWithoutPrescription =
               doc.data()['ifCanUseWithoutPrescription'];
           product.sideReactions = doc.data()['Warnings'];
+          product.urlImage = doc.data()['urlImage'];
           result.add(product);
         });
 

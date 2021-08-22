@@ -23,9 +23,9 @@ class BottomNavBar extends StatefulWidget {
     ItemBottomNavBar(
         text: 'Home', color: Colors.blue[300], iconData: Icons.home),
     ItemBottomNavBar(
-        text: 'like', color: Colors.pink[400], iconData: Icons.favorite_border),
+        text: 'Sales', color: Colors.pink[400], iconData: Icons.sailing),
     ItemBottomNavBar(
-        text: 'Search', color: Colors.grey, iconData: Icons.search),
+        text: 'buying', color: Colors.grey, iconData: Icons.search),
     ItemBottomNavBar(
         text: 'profile', color: Colors.green, iconData: Icons.person),
   ];
@@ -118,72 +118,3 @@ class _BottomNavBarState extends State<BottomNavBar>
     );
   }
 }
-
-// child: Container(
-//   height: widget.mediaQueryData.size.height * 0.07,
-//   decoration: BoxDecoration(
-//       borderRadius: BorderRadius.only(
-//         topLeft: Radius.circular(28.0),
-//         topRight: Radius.circular(28.0),
-//       ),
-//       color: Theme.of(context).primaryColor),
-//   child: AnimatedContainer(
-//     duration: Duration(milliseconds: 900),
-//     curve: Curves.easeInExpo,
-//     child: Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: <Widget>[
-//         Container(
-//           height: widget.mediaQueryData.size.height * 0.07,
-//           width: widget.mediaQueryData.size.width / 2 - 40,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: <Widget>[
-//               IconButton(
-//                 icon: Icon(Icons.home),
-//                 color: Colors.blue[100],
-//                 onPressed: () {
-//                   Navigator.push(
-//                     context,
-//                     MaterialPageRoute(builder: (context) => MainScreen()),
-//                   );
-//                 },
-//                 // color: Color(0xFFEF7532),
-//               ),
-//               IconButton(
-//                 icon: Icon(
-//                   Icons.person_outline,
-//                   color: Colors.white,
-//                 ),
-//                 color: Color(0xFF676E79),
-//                 onPressed: () {},
-//               ),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           height: 50.0,
-//           width: MediaQuery.of(context).size.width / 2 - 40.0,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: <Widget>[
-//               IconButton(
-//                 icon: Icon(
-//                   Icons.search,
-//                   color: Colors.white,
-//                 ),
-//                 color: Color(0xFF676E79),
-//                 onPressed: () {},
-//               ),
-//               IconButton(
-//                 icon: Icon(Icons.shopping_basket),
-//                 color: Color(0xFF676E79),
-//                 onPressed: () {},
-//               )
-//             ],
-//           ),
-//         ),
-//       ],
-//     ),
-//   ),
-// ),
