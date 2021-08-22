@@ -9,9 +9,10 @@ class ConstantsMainPage {
   static const String detailsForBox = 'عرض تفاصيل الصندوق';
   static const String createAccount = 'إنشاء حساب جديد';
   static const String deleteAccount = 'حـذف حساب';
-  static const String monthlyCalculate = 'جرد شهري';
-  static const String yearCalculate = 'جرد سنوي';
+  static const String quantityInventory = 'الجرد';
+  static const String finincalReports = 'التقارير المالية';
   static const String cost = 'إدخال التكاليف';
+  static const String deleteProduct = 'حذف صنف دوائي';
   static const String addOrUpdateNewMedicen = 'إضافة.. تعديل على صنف دوائي';
 
   static List<String> choices(BuildContext context) {
@@ -19,10 +20,11 @@ class ConstantsMainPage {
       DemoLocalizations.of(context).translate('showDetielsclacBox'),
       DemoLocalizations.of(context).translate('newACCOUNT'),
       DemoLocalizations.of(context).translate('DeleteAccount'),
-      DemoLocalizations.of(context).translate('jareddMonthly'),
-      DemoLocalizations.of(context).translate('jarddYear'),
+      DemoLocalizations.of(context).translate('quantityInventory'),
+      DemoLocalizations.of(context).translate('finincalReports'),
       DemoLocalizations.of(context).translate('EnteringCost'),
       DemoLocalizations.of(context).translate('addOrupdateMed'),
+      DemoLocalizations.of(context).translate('deleteProduct'),
     ];
   }
 

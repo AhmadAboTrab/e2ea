@@ -6,10 +6,11 @@
     "showDetielsclacBox": "عرض تفاصيل الصندوق",
     "newACCOUNT": "إنشاء حساب جديد",
     "DeleteAccount": "حذف حساب",
-    "jareddMonthly": "جرد شهري",
-    "jarddYear": "جرد سنوي",
+    "quantityInventory": "الجرد",
+    "finincalReports": "التقارير المالية",
     "EnteringCost": "إدخال التكاليف",
     "addOrupdateMed": "إضافة أو تعديل دواء",
+    "deleteProduct": "حذف صنف دوائي",
 
 
     "SearchByEmployee": "البحث عن موظف",
@@ -79,7 +80,32 @@
 
 
     "____________comment5______________": "Editing Page",
-    "titleAppbarEditiingPage": "تعديل أو إضافة "
+    "titleAppbarEditiingPage": "تعديل أو إضافة ",
+
+
+    "______________________comment 6": " Costs Page",
+    "titleAppbarCostPage": "إدخال التكاليف",
+    "typeOfCost": "نوع التكلفة",
+    "priceOfCost": "التكلفة",
+    "notes": "ملاحظات",
+
+    "presenTime": "الوقت الحالي",
+    "date": "التاريخ",
+
+
+    "validator": "لا يمكنك إكمال المهمة إن لم تملئ جميع الحقول",
+    "backToHome": "العودة للصفحة الرئيسية",
+    "buttonBackToHome": "موافق",
+
+    "inListCosts1": "كهرباء",
+    "inListCosts2": "مياه",
+    "inListCosts3": "نفقات",
+    "inListCosts4": "رواتب الموظفين",
+    "inListCosts5": "ضرائب",
+
+    "_____comment 7________": "delete product",
+    "contentDeleteProduct": "هل أنت متأد من أنك تريد حذف هذا الدواء"
+
 
 
 }

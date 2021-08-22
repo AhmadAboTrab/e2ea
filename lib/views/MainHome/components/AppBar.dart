@@ -3,6 +3,9 @@
 //import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:e2ea/Controller/search/allSearch.dart';
 
+import 'package:e2ea/Controller/Api/deleteFromFirebase.dart';
+import 'package:e2ea/Widgets/AlertDialoge.dart';
+
 import '../../../models/employee.dart';
 
 import '../../../Controller/Api/Search/EmployeeSearch/EmployeeSearchByCharacter.dart';
@@ -204,48 +207,6 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
             },
           ),
         ),
-        // Container(
-        //   child: PopupMenuButton<Language>(
-        //     icon: Icon(Icons.language),
-        //     onSelected:
-        //       choiceLanguage,
-
-        //     itemBuilder: (BuildContext context) {
-        //       return Language.langList().map<PopupMenuItem<Language>>((e) {
-        //         return PopupMenuItem(
-        //             child: Row(
-        //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //           children: [Text(e.name), Text(e.flag)],
-        //         ));
-        //       }).toList();
-        //     },
-        //   ),
-        // )
-        // Center(
-        //   child: Container(
-        //     margin:
-        //         EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.01),
-        //     child: Center(
-        //       child: DropdownButton(
-        //         icon: Icon(
-        //           Icons.language,
-        //           color: Colors.black,
-        //         ),
-        //         onChanged: (value) {
-        //           choiceLanguage(value);
-        //         },
-        //         items: Language.langList().map<DropdownMenuItem<Language>>((e) {
-        //           return DropdownMenuItem(
-        //               value: e,
-        //               child: Row(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                 children: [Text(e.name), Text(e.flag)],
-        //               ));
-        //         }).toList(),
-        //       ),
-        //     ),
-        //   ),
-        // ),
       ],
     );
   }
@@ -336,15 +297,16 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
     MyApp.setLocale(context, tempLocale);
   }
 
-  void choicePopButton(String text) {
-    if (text == DemoLocalizations.of(context).translate('showDetielsclacBox')) {
+  void choicePopButton(String choice) {
+    if (choice ==
+        DemoLocalizations.of(context).translate('showDetielsclacBox')) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => DetailsOfBox()),
       );
       return;
     }
-    if (text == DemoLocalizations.of(context).translate('newACCOUNT')) {
+    if (choice == DemoLocalizations.of(context).translate('newACCOUNT')) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -353,7 +315,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
       );
       return;
     }
-    if (text == DemoLocalizations.of(context).translate('DeleteAccount')) {
+    if (choice == DemoLocalizations.of(context).translate('DeleteAccount')) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -364,7 +326,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
 
       return;
     }
-    if (text == DemoLocalizations.of(context).translate('jareddMonthly')) {
+    if (choice == DemoLocalizations.of(context).translate('finincalReports')) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -374,27 +336,32 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
 
       return;
     }
-    if (text == DemoLocalizations.of(context).translate('jarddYear')) {
+    if (choice ==
+        DemoLocalizations.of(context).translate('quantityInventory')) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => YearInventory(),
+          builder: (context) => MonthlyInventory(),
         ),
       );
 
       return;
     }
-    if (text == DemoLocalizations.of(context).translate('EnteringCost')) {
+
+    if (choice == DemoLocalizations.of(context).translate('EnteringCost')) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => EnteringCosts(employee: widget.employee,),
+          builder: (context) => EnteringCosts(
+            employee: widget.employee,
+            mediaQueryData: widget.mediaQueryData,
+          ),
         ),
       );
 
       return;
     }
-    if (text == DemoLocalizations.of(context).translate('addOrupdateMed')) {
+    if (choice == DemoLocalizations.of(context).translate('addOrupdateMed')) {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -406,5 +373,97 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
 
       return;
     }
+    if (choice == DemoLocalizations.of(context).translate('deleteProduct')) {
+      deleteProduct();
+      return;
+    }
+  }
+
+  deleteProduct() async {
+    String barcode = await ScanCodeByCamera().scanBarcodeNormal();
+    List resultSearch = await SearchByBarcode().getUserSugesstions(barcode);
+    Product product = resultSearch[0];
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Constants.padding),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: contentBox(context, product),
+      ),
+    );
+  }
+
+  contentBox(context, Product product) {
+    return Stack(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+              left: Constants.padding,
+              top: Constants.avatarRadius + Constants.padding,
+              right: Constants.padding,
+              bottom: Constants.padding),
+          margin: EdgeInsets.only(top: Constants.avatarRadius),
+          decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(Constants.padding),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+              ]),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              FittedBox(
+                child: Text(
+                  product.name,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                DemoLocalizations.of(context).translate('contentDeleteProduct'),
+                style: TextStyle(fontSize: 14),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 22,
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: FlatButton(
+                    onPressed: () async {
+                      await DeleteFromFirebase()
+                          .deleteFormFirebase(product, 'medicins');
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      DemoLocalizations.of(context).translate('OkayButton'),
+                      style: TextStyle(fontSize: 18),
+                    )),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          left: 30,
+          right: 45,
+          child: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            radius: Constants.avatarRadius,
+            child: ClipRRect(
+              borderRadius:
+                  BorderRadius.all(Radius.circular(Constants.avatarRadius)),
+              child: Image.asset("assets/images/panadol.png"),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

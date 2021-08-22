@@ -1,5 +1,3 @@
-
-
 import 'package:e2ea/views/MainHome/MainScreen.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
@@ -196,12 +194,25 @@ class _SaleMedState extends State<SaleMed> {
                 ],
               ),
             ),
-      floatingActionButton: FloatingButton(
-        customer: widget.customer,
-        tempBody: widget.tempBody,
-        employee: widget.employee,
-        totalCostOfProducts: widget.totalCostOfProducts,
-        counterproduct: counterproduct,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          FloatingButton(
+            heroTag: 'btnSale',
+            customer: widget.customer,
+            tempBody: widget.tempBody,
+            employee: widget.employee,
+            totalCostOfProducts: widget.totalCostOfProducts,
+            counterproduct: counterproduct,
+          ),
+          FloatingActionButton(
+            heroTag: 'btn_PDF',
+            onPressed: () async {
+
+            },
+            child: Text('pdf'),
+          )
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -216,9 +227,11 @@ class FloatingButton extends StatelessWidget {
     @required this.totalCostOfProducts,
     @required this.counterproduct,
     @required this.tempBody,
+    @required this.heroTag,
   }) : super(key: key);
 
   final Employee employee;
+  final String heroTag;
   final Customer customer;
   final double totalCostOfProducts;
   final tempBody;
@@ -226,7 +239,12 @@ class FloatingButton extends StatelessWidget {
 
   Future<void> press_createPdf(BuildContext context) async {
     PdfDocument document = PdfDocument();
-    document.pages.add();
+    final page = document.pages.add();
+    page.graphics.drawString(
+      'Welcome to PDF succinctly?',
+      PdfStandardFont(PdfFontFamily.helvetica, 30),
+    );
+
     List<int> bytes = document.save();
     document.dispose();
     saveAndLaunchFile(bytes, 'Output.pdf');
@@ -301,6 +319,7 @@ class FloatingButton extends StatelessWidget {
         print(totalCostOfProducts);
       },
       child: FloatingActionButton(
+        heroTag: heroTag,
         onPressed: () => onPressed(context),
         child: Container(
           child: Column(

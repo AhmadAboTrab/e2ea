@@ -30,9 +30,9 @@ class AddedQuantity {
       });
     }
   }
-  addToCostBill(var map ,double costOfBill)async{
+  addToOrderBill(var map ,double costOfBill)async{
          DocumentReference ref =
-           FirebaseFirestore.instance.collection('CostOfBill').doc();
+           FirebaseFirestore.instance.collection('OrderBill').doc();
       ref.set({
         'id' : ref.id,
         'quan':map

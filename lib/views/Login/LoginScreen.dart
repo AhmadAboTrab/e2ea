@@ -49,165 +49,167 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
-            height: 600,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: mediaQuery.size.height * 0.001,
-                    ),
-                    Container(child: new Image.asset("assets/images/gr1.jpg")),
-                    SizedBox(
-                      height: mediaQuery.size.height * 0.07,
-                    ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      controller: email,
-                      validator: (value) => value.isNotEmpty
-                          ? null
-                          : "Please Enter a email address",
-                      decoration: InputDecoration(
-                        hintText: "Email",
-                        prefixIcon: Icon(Icons.mail),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+          child: Form(
+            child: Container(
+              height: 600,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: mediaQuery.size.height * 0.001,
+                      ),
+                      Container(child: new Image.asset("assets/images/gr1.jpg")),
+                      SizedBox(
+                        height: mediaQuery.size.height * 0.07,
+                      ),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        controller: email,
+                        validator: (value) => value.isNotEmpty
+                            ? null
+                            : "Please Enter a email address",
+                        decoration: InputDecoration(
+                          hintText: "Email",
+                          prefixIcon: Icon(Icons.mail),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: mediaQuery.size.height * 0.04,
-                    ),
-                    TextFormField(
-                      controller: password,
-                      validator: (value) => value.length < 6
-                          ? "less than 6 character should be more than 8"
-                          : null,
-                      obscureText: show,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: "password",
-                        prefixIcon: IconButton(
-                          icon: show
-                              ? Icon(Icons.visibility_off)
-                              : Icon(Icons.visibility),
-                          onPressed: () {
-                            setState(() {
-                              show = !show;
-                            });
-                          },
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
+                      SizedBox(
+                        height: mediaQuery.size.height * 0.04,
+                      ),
+                      TextFormField(
+                        controller: password,
+                        validator: (value) => value.length < 6
+                            ? "less than 6 character should be more than 8"
+                            : null,
+                        obscureText: show,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          hintText: "password",
+                          prefixIcon: IconButton(
+                            icon: show
+                                ? Icon(Icons.visibility_off)
+                                : Icon(Icons.visibility),
+                            onPressed: () {
+                              setState(() {
+                                show = !show;
+                              });
+                            },
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: mediaQuery.size.height * 0.05,
-                    ),
-                    MaterialButton(
-                      onPressed: () async {
-                        if (formKey.currentState.validate()) {
-                          print(email.text + " " + password.text);
-                          try {
-                            await auth.signInWithEmailAndPassword(
-                                email: email.text, password: password.text);
-
-                            result = 'correct';
-                          } on FirebaseAuthException catch (exception) {
-                            // print(exception.code);
-                            switch (exception.code) {
-                              case 'user-not-found':
-                                {
-                                  result = 'user-not-found';
-                                  break;
-                                }
-                              case 'wrong-password':
-                                {
-                                  result = 'wrong-password';
-                                  break;
-                                }
-                              case 'network-request-failed':
-                                {
-                                  result = 'network-request-failed';
-                                  break;
-                                }
-                              default:
-                                {
-                                  result = 'undefined';
-                                  break;
-                                }
+                      SizedBox(
+                        height: mediaQuery.size.height * 0.05,
+                      ),
+                      MaterialButton(
+                        onPressed: () async {
+                          if (formKey.currentState.validate()) {
+                            print(email.text + " " + password.text);
+                            try {
+                              await auth.signInWithEmailAndPassword(
+                                  email: email.text, password: password.text);
+          
+                              result = 'correct';
+                            } on FirebaseAuthException catch (exception) {
+                              // print(exception.code);
+                              switch (exception.code) {
+                                case 'user-not-found':
+                                  {
+                                    result = 'user-not-found';
+                                    break;
+                                  }
+                                case 'wrong-password':
+                                  {
+                                    result = 'wrong-password';
+                                    break;
+                                  }
+                                case 'network-request-failed':
+                                  {
+                                    result = 'network-request-failed';
+                                    break;
+                                  }
+                                default:
+                                  {
+                                    result = 'undefined';
+                                    break;
+                                  }
+                              }
                             }
-                          }
-                        } //if validation email and password
-                        if (result == 'correct') {
-                          List temp = await EmployeeSearchByEmail()
-                              .getUserSugesstions(email.text);
-                          if (temp == null) {
-                            showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                      title: Text('Warning'),
-                                      content:
-                                          Text('this employee is not there '),
-                                      actions: [
-                                        MaterialButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: Text('okay'),
-                                        )
-                                      ],
-                                    ));
-                          }
-                          Employee employee = temp[0];
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MainScreen(
-                                employee: employee,
+                          } //if validation email and password
+                          if (result == 'correct') {
+                            List temp = await EmployeeSearchByEmail()
+                                .getUserSugesstions(email.text);
+                            if (temp == null) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text('Warning'),
+                                        content:
+                                            Text('this employee is not there '),
+                                        actions: [
+                                          MaterialButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('okay'),
+                                          )
+                                        ],
+                                      ));
+                            }
+                            Employee employee = temp[0];
+          
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => MainScreen(
+                                  employee: employee,
+                                ),
                               ),
-                            ),
-                          );
-                        } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              content: Text(result),
-                              actions: [
-                                // ignore: deprecated_member_use
-                                RaisedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false);
-                                  },
-                                  child: Text("close"),
-                                )
-                              ],
-                            ),
-                          ); //show dialog function
-                        }
-                      },
-                      height: mediaQuery.size.height * 0.08,
-                      minWidth: double.infinity,
-                      color: Theme.of(context).primaryColor,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                            );
+                          } else {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                content: Text(result),
+                                actions: [
+                                  // ignore: deprecated_member_use
+                                  RaisedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop(false);
+                                    },
+                                    child: Text("close"),
+                                  )
+                                ],
+                              ),
+                            ); //show dialog function
+                          }
+                        },
+                        height: mediaQuery.size.height * 0.08,
+                        minWidth: double.infinity,
+                        color: Theme.of(context).primaryColor,
+                        textColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

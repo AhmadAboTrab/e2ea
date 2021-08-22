@@ -1,6 +1,6 @@
 import './localization/localizations_demo.dart';
 
-import './models/employee.dart';
+
 import './routes/customer_rout.dart';
 import './routes/route_names.dart';
 
@@ -11,6 +11,8 @@ import './counter.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'models/employee.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'PharmacyApp',
       theme: ThemeData(
-        primaryColor: Colors.green,
+        primaryColor: Colors.yellow,
       ),
       locale: this.locale,
       localizationsDelegates: [

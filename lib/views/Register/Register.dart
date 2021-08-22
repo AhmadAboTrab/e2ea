@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:ui' as ui;
 
-//import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
 class Register extends StatefulWidget {
   Register({Key key}) : super(key: key);
@@ -486,8 +486,8 @@ class _RegisterState extends State<Register> {
         content: Text(
           titleInDialog,
           textDirection: Utility.isArabic(titleInDialog)
-              ? TextDirection.rtl
-              : TextDirection.ltr,
+              ? ui.TextDirection.rtl
+              : ui.TextDirection.ltr,
           textAlign: Utility.isArabic(titleInDialog)
               ? TextAlign.right
               : TextAlign.left,

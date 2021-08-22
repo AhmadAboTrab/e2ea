@@ -301,7 +301,7 @@ class _EnteringMedicenState extends State<EnteringMedicen>
             widget.productsList.forEach((element) {
               map[element.barCode] = element.toJson();
             });
-            AddedQuantity().addToCostBill(mapProduct, costOfBill);
+            AddedQuantity().addToOrderBill(mapProduct, costOfBill);
             showDialog(
               context: context,
               builder: (context) => AlertDialog(

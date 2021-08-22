@@ -7,10 +7,11 @@
     "showDetielsclacBox": "Details About Box",
     "newACCOUNT": "Create Account",
     "DeleteAccount": "Delete Account",
-    "jareddMonthly": "Monthly",
-    "jarddYear": "yearly",
+    "quantityInventory": "Quantity Inventory",
+    "finincalReports": "Finical Reports",
     "EnteringCost": "Entering Cost",
     "addOrupdateMed": "Add Or Edit Med",
+    "deleteProduct": "Delete Prodcut",
 
 
     "SearchByEmployee": "Search about Employee",
@@ -92,7 +93,29 @@
 
 
     "____________comment5______________": "Editing Page",
-    "titleAppbarEditiingPage": "Editing Or Added"
+    "titleAppbarEditiingPage": "Editing Or Added",
+
+
+    "______________________comment 6": " Costs Page",
+    "titleAppbarCostPage": "Entering Cost",
+    "typeOfCost": "type of cost",
+    "priceOfCost": "price",
+    "notes": "notes",
+
+    "presenTime": "present time",
+    "date": "Date",
+
+    "validator": "please you can't make any thing if not fill it",
+    "backToHome": "Back To Home Page",
+    "buttonBackToHome": "okay",
+
+    "inListCosts1": "Electric",
+    "inListCosts2": "water",
+    "inListCosts3": "expenses",
+    "inListCosts4": "Salary",
+    "inListCosts5": "taxes",
+    "_____comment 7________": "delete product",
+    "contentDeleteProduct": "Are You sure want delete this product ???? "
 
 
 
