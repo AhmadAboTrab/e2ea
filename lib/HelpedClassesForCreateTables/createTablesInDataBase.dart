@@ -30,18 +30,11 @@ class CreateTables extends StatelessWidget {
                     indexKey.add(indexKeyTemp[i]);
                   }
                   DocumentReference ref =  FirebaseFirestore.instance
-                      .collection('medicins')
+                      .collection('testDate')
                       .doc();
                   ref.set({
-                    'index_key': indexKey,
-                    'medicin_id': ref.id,
-                    'medicin_name': s,
-                    'Packing': 100,
-                    'From': 'Tablets',
-                    'manufacture_company': 'Avenzor',
-                    'Theraputic Categories': theraputicCategories,
-                    //'Indications': "tetetetetete",
-                    'Composition': composition,
+                    'index_key': DateTime.now(),
+            
                   });
                 },
                 child: Text("Add Medicen Table"),

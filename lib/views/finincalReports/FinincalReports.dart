@@ -12,6 +12,10 @@ class FinincalReports extends StatefulWidget {
   DateTime pickedDate = new DateTime(0, 0, 0, 0, 0, 0);
   TextEditingController dailyDate;
 
+  DateTime firstDateMonthly = new DateTime(0, 0, 0, 0, 0, 0),
+      secondDateMonthly = new DateTime(0, 0, 0, 0, 0, 0);
+  String whatController;
+
   @override
   _FinincalReportsState createState() => _FinincalReportsState();
 }
@@ -24,7 +28,15 @@ class _FinincalReportsState extends State<FinincalReports> {
     widget.yearly = false;
     widget.pickedDate = new DateTime.now();
     widget.dailyDate = new TextEditingController();
+    widget.firstDateMonthly = new DateTime.now();
+    widget.secondDateMonthly = new DateTime.now();
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -34,7 +46,7 @@ class _FinincalReportsState extends State<FinincalReports> {
       right: widget.mediaQueryData.size.width * 0.015,
       child: Container(
         width: widget.mediaQueryData.size.width * 0.97,
-        height: widget.mediaQueryData.size.height * 0.19,
+        height: widget.mediaQueryData.size.height * 0.24,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -52,36 +64,42 @@ class _FinincalReportsState extends State<FinincalReports> {
               EdgeInsets.only(left: widget.mediaQueryData.size.width * 0.001),
           child: Row(
             children: [
-              ButtonToChoiceFillter(
-                mediaQueryData: widget.mediaQueryData,
-                color: Colors.green.withOpacity(0.5),
-                hintText: 'daily',
-                onPressed: () => setState(
-                  () {
-                    widget.daily = true;
-                  },
+              Expanded(
+                child: ButtonToChoiceFillter(
+                  mediaQueryData: widget.mediaQueryData,
+                  color: Colors.green.withOpacity(0.5),
+                  hintText: 'daily',
+                  onPressed: () => setState(
+                    () {
+                      widget.daily = true;
+                    },
+                  ),
                 ),
               ),
               SizedBox(width: widget.mediaQueryData.size.width * 0.001),
-              ButtonToChoiceFillter(
-                mediaQueryData: widget.mediaQueryData,
-                color: Color(0xff2ac3ff),
-                hintText: 'monthly',
-                onPressed: () => setState(
-                  () {
-                    widget.daily = true;
-                  },
+              Expanded(
+                child: ButtonToChoiceFillter(
+                  mediaQueryData: widget.mediaQueryData,
+                  color: Color(0xff2ac3ff),
+                  hintText: 'monthly',
+                  onPressed: () => setState(
+                    () {
+                      widget.monthly = true;
+                    },
+                  ),
                 ),
               ),
               SizedBox(width: widget.mediaQueryData.size.width * 0.0001),
-              ButtonToChoiceFillter(
-                mediaQueryData: widget.mediaQueryData,
-                color: Color(0xffff6968),
-                hintText: 'yearly',
-                onPressed: () => setState(
-                  () {
-                    widget.daily = true;
-                  },
+              Expanded(
+                child: ButtonToChoiceFillter(
+                  mediaQueryData: widget.mediaQueryData,
+                  color: Color(0xffff6968),
+                  hintText: 'yearly',
+                  onPressed: () => setState(
+                    () {
+                      widget.yearly = true;
+                    },
+                  ),
                 ),
               ),
             ],
@@ -93,15 +111,26 @@ class _FinincalReportsState extends State<FinincalReports> {
       children: [
         Container(
           child: Center(
-            child: Text(
-              'Finical Reports Day',
-              style:
-                  TextStyle(fontSize: widget.mediaQueryData.size.width * 0.06),
+            child: MaterialButton(
+              onPressed: () => setState(() {
+                widget.daily = false;
+                widget.monthly = false;
+                widget.yearly = false;
+              }),
+              child: Text(
+                'Finical Reports Day',
+                style: TextStyle(
+                    fontSize: widget.mediaQueryData.size.width * 0.06),
+              ),
             ),
           ),
           height: widget.mediaQueryData.size.height * 0.35,
           width: double.infinity,
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(8),
+              bottomRight: Radius.circular(8),
+            ),
             gradient: LinearGradient(
               colors: [
                 Colors.blue.withOpacity(0.5),
@@ -119,7 +148,7 @@ class _FinincalReportsState extends State<FinincalReports> {
       right: widget.mediaQueryData.size.width * 0.015,
       child: Container(
         width: widget.mediaQueryData.size.width * 0.97,
-        height: widget.mediaQueryData.size.height * 0.19,
+        height: widget.mediaQueryData.size.height * 0.24,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -136,19 +165,6 @@ class _FinincalReportsState extends State<FinincalReports> {
           child: widget.checkPresentTime
               ? Row(
                   children: [
-                    Checkbox(
-                        value: widget.checkPresentTime,
-                        onChanged: (value) {
-                          setState(() {
-                            widget.checkPresentTime = value;
-                          });
-                        }),
-                    Text('present Date')
-                  ],
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
                     Row(
                       children: [
                         Checkbox(
@@ -161,20 +177,63 @@ class _FinincalReportsState extends State<FinincalReports> {
                         Text('present Date')
                       ],
                     ),
-                    choiceDate(),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.black)),
+                        child: MaterialButton(
+                          onPressed: () {},
+                          child: Text('Get'),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Checkbox(
+                                value: widget.checkPresentTime,
+                                onChanged: (value) {
+                                  setState(() {
+                                    widget.checkPresentTime = value;
+                                  });
+                                }),
+                            Text('present Date')
+                          ],
+                        ),
+                        choiceDate(),
+                      ],
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: Colors.black)),
+                        child: MaterialButton(
+                          onPressed: () {},
+                          child: Text('Get'),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
         ),
       ),
     );
 
-    ///here this varaible is finincal day
+    ///here this varaible is finincal month
     var finincalMonthly = Positioned(
       top: widget.mediaQueryData.size.height * 0.25,
       right: widget.mediaQueryData.size.width * 0.015,
       child: Container(
         width: widget.mediaQueryData.size.width * 0.97,
-        height: widget.mediaQueryData.size.height * 0.19,
+        height: widget.mediaQueryData.size.height * 0.24,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -187,11 +246,91 @@ class _FinincalReportsState extends State<FinincalReports> {
           ],
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Container(),
+        child: Container(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  choiceDateFirst(),
+                  choiceDateSecond(),
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black)),
+                  child: MaterialButton(
+                    onPressed: () {},
+                    child: Text('Get'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
 
+    ///here this varaible is finincal year
+    var finincalYearly = Positioned(
+      top: widget.mediaQueryData.size.height * 0.25,
+      right: widget.mediaQueryData.size.width * 0.015,
+      child: Container(
+        width: widget.mediaQueryData.size.width * 0.97,
+        height: widget.mediaQueryData.size.height * 0.24,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.09),
+              blurRadius: 8,
+              spreadRadius: 3,
+              offset: Offset(0, 10),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Container(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  choiceDateFirst(),
+                  choiceDateSecond(),
+                ],
+              ),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.black)),
+                  child: MaterialButton(
+                    onPressed: () {},
+                    child: Text('Get'),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    ///total sell
+    var totalSell = Row(
+      children: [
+        Icon(Icons.arrow_upward, color: Colors.green),
+        SizedBox(width: widget.mediaQueryData.size.width * 0.02),
+        Text('f')
+      ],
+    );
+
+    ///
+    ///
+
     ///Here is my scaffold
+
     return Scaffold(
       body: Stack(
         children: [
@@ -199,9 +338,9 @@ class _FinincalReportsState extends State<FinincalReports> {
           widget.daily && !widget.monthly && !widget.yearly
               ? finincalDaily
               : !widget.daily && widget.monthly && !widget.yearly
-                  ? Text('monthly')
+                  ? finincalMonthly
                   : !widget.daily && !widget.monthly && widget.yearly
-                      ? Text('yealy')
+                      ? finincalYearly
                       : Daily_Monthly_Yearly,
         ],
       ),
@@ -209,12 +348,14 @@ class _FinincalReportsState extends State<FinincalReports> {
     );
   }
 
+  ///_________________________________________________________
+  ///normal case chose one date
   Expanded choiceDate() {
     return Expanded(
       child: Container(
         margin: EdgeInsets.only(
           top: widget.mediaQueryData.size.height * 0.04,
-          bottom: widget.mediaQueryData.size.height * 0.04,
+          bottom: widget.mediaQueryData.size.height * 0.05,
           right: widget.mediaQueryData.size.height * 0.01,
           left: widget.mediaQueryData.size.height * 0.01,
         ),
@@ -233,9 +374,7 @@ class _FinincalReportsState extends State<FinincalReports> {
               ),
               trailing: Icon(Icons.keyboard_arrow_down),
               onTap: () {
-                // launch(
                 pickDate();
-                // );
               },
             ),
           ],
@@ -246,17 +385,116 @@ class _FinincalReportsState extends State<FinincalReports> {
 
   pickDate() async {
     DateTime datetime = await showDatePicker(
-      context: context,
-      firstDate: DateTime(DateTime.now().year - 70),
-      lastDate: DateTime(DateTime.now().year + 75),
-      initialDate: widget.pickedDate,
-    );
-    if (widget.dailyDate != null && datetime != null) {
-      setState(() {
-        widget.pickedDate = datetime;
-      });
-    }
+        context: context,
+        firstDate: DateTime(DateTime.now().year - 70),
+        lastDate: DateTime(DateTime.now().year + 75),
+        initialDate: widget.pickedDate);
+
+    setState(() {
+      widget.pickedDate = datetime;
+    });
   }
+
+  //___________________________________________________________________________
+//for first date
+  Expanded choiceDateFirst() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(
+          top: widget.mediaQueryData.size.height * 0.04,
+          bottom: widget.mediaQueryData.size.height * 0.05,
+          right: widget.mediaQueryData.size.height * 0.01,
+          left: widget.mediaQueryData.size.height * 0.01,
+        ),
+        //     bottom: widget.mediaQueryData.size.height * 0.06),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: FittedBox(
+                child: Text(
+                  '${widget.firstDateMonthly.year},${widget.firstDateMonthly.month},${widget.firstDateMonthly.day}',
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
+              trailing: Icon(Icons.keyboard_arrow_down),
+              onTap: () {
+                // launch(
+                pickDateFirst();
+
+                // );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  pickDateFirst() async {
+    DateTime datetime = await showDatePicker(
+        context: context,
+        firstDate: DateTime(DateTime.now().year - 70),
+        lastDate: DateTime(DateTime.now().year + 75),
+        initialDate: widget.firstDateMonthly);
+
+    setState(() {
+      widget.firstDateMonthly = datetime;
+    });
+  }
+
+  //___________________________________________________________________________
+  ///For scond date
+  Expanded choiceDateSecond() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.only(
+          top: widget.mediaQueryData.size.height * 0.04,
+          bottom: widget.mediaQueryData.size.height * 0.05,
+          right: widget.mediaQueryData.size.height * 0.01,
+          left: widget.mediaQueryData.size.height * 0.01,
+        ),
+        //     bottom: widget.mediaQueryData.size.height * 0.06),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(12)),
+        child: Column(
+          children: <Widget>[
+            ListTile(
+              title: FittedBox(
+                child: Text(
+                  '${widget.secondDateMonthly.year},${widget.secondDateMonthly.month},${widget.secondDateMonthly.day}',
+                  style: TextStyle(fontSize: 10),
+                ),
+              ),
+              trailing: Icon(Icons.keyboard_arrow_down),
+              onTap: () {
+                // launch(
+                pickDateSecond();
+
+                // );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  pickDateSecond() async {
+    DateTime datetime = await showDatePicker(
+        context: context,
+        firstDate: DateTime(DateTime.now().year - 70),
+        lastDate: DateTime(DateTime.now().year + 75),
+        initialDate: widget.secondDateMonthly);
+
+    setState(() {
+      widget.secondDateMonthly = datetime;
+    });
+  }
+  //_________________________________________________________________
 }
 
 class ButtonToChoiceFillter extends StatelessWidget {
