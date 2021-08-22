@@ -4,10 +4,10 @@
 //import 'package:e2ea/Controller/search/allSearch.dart';
 
 import '../../../Controller/Api/deleteFromFirebase.dart';
-import '/Widgets/AlertDialoge.dart';
+
 import 'package:e2ea/views/Register/Register.dart';
 import '../../../views/finincalReports/FinincalReports.dart';
-import '../../../views/quantityInverntory/quantityInventory.dart';
+
 
 import '../../../models/employee.dart';
 
@@ -33,7 +33,11 @@ import '../../../views/PageMedicins/PageMedicins.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-//import 'package:flutter_typeahead/flutter_typeahead.dart';
+class Constants {
+  Constants._();
+  static const double padding = 30;
+  static const double avatarRadius = 45;
+}
 
 //Notes
 //title use FittedBox to make responseve text
@@ -343,7 +347,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => QuantityInvernotry(),
+          builder: (context) => Register(),
         ),
       );
 
@@ -368,6 +372,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
         context,
         MaterialPageRoute(
           builder: (context) => AddOrUpdateMed(
+            employee:widget.employee,
             mediaQueryData: widget.mediaQueryData,
           ),
         ),

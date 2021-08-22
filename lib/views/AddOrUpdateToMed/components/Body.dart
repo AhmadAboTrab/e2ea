@@ -1,7 +1,9 @@
+import '../../../models/employee.dart';
+import '../../../views/MainHome/MainScreen.dart';
+
 import '../../../Controller/Api/Search/SearchWithAbstractMedicen/SearchByBarcode.dart';
 import '../../../Controller/Api/UploadToFirebase/AddNewProduct.dart';
 import '../../../Controller/assistentController/ScanCodeByCamera.dart';
-import '../../../Widgets/AlertDialoge.dart';
 
 import '../../../Widgets/FieldAdding.dart';
 import '../../../models/Product.dart';
@@ -14,6 +16,7 @@ class BodyAddedPage extends StatelessWidget {
     Key key,
     this.mediaQueryData,
     this.textEditingControllerList,
+    this.employee,
   }) : super(key: key);
 
   List<TextEditingController> textEditingControllerList = [];
@@ -22,6 +25,7 @@ class BodyAddedPage extends StatelessWidget {
   List comp = [];
   List inde = [];
   List<Widget> childColumn;
+  Employee employee;
 
   Widget build(BuildContext context) {
     mediaQueryData = MediaQuery.of(context);
@@ -227,11 +231,22 @@ class BodyAddedPage extends StatelessWidget {
               AddNewProductOrUpdate().updateInformation(product);
               showDialog(
                   context: context,
-                  builder: (context) => AlertDialoge(
-                      title:
-                          "تمت إضافةالدواء بنجاح هل تود العودة للصفحة الرئيسية أم البقاء ؟",
-                      descriptions: "dhfskjdfhsdkjfhsdjkfh",
-                      text: "fsdfsdfsdf"));
+                  builder: (context) => AlertDialog(
+                        title: Text('تمت العملية بنجاح'),
+                        actions: [
+                          MaterialButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainScreen(
+                                            employee: employee,
+                                          )));
+                            },
+                            child: Text("Go To Home"),
+                          )
+                        ],
+                      ));
             },
             child: Container(
                 height: MediaQuery.of(context).size.height * 0.08,

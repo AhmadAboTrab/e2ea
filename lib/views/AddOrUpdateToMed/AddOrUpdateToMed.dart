@@ -1,3 +1,5 @@
+import '../../../models/employee.dart';
+
 import '../../Controller/Api/Search/SearchWithAbstractMedicen/SearchByBarcode.dart';
 
 import '../../Widgets/SearchBy_flutterTypeHead.dart';
@@ -10,6 +12,7 @@ import 'components/Body.dart';
 class AddOrUpdateMed extends StatefulWidget {
   AddOrUpdateMed({
     this.mediaQueryData,
+    this.employee,
     key,
   }) : super(key: key);
   MediaQueryData mediaQueryData;
@@ -17,6 +20,7 @@ class AddOrUpdateMed extends StatefulWidget {
       List<TextEditingController>.generate(
           20, (index) => new TextEditingController());
   bool isSearching = true;
+  Employee employee;
 
   @override
   _AddOrUpdateMedState createState() => _AddOrUpdateMedState();
@@ -53,7 +57,7 @@ class _AddOrUpdateMedState extends State<AddOrUpdateMed> {
                   icon: Icon(Icons.cancel),
                   onPressed: () {
                     setState(() {
-                      widget.isSearching = true ;
+                      widget.isSearching = true;
                     });
                   },
                 )
@@ -79,6 +83,7 @@ class _AddOrUpdateMedState extends State<AddOrUpdateMed> {
         ],
       ),
       body: BodyAddedPage(
+        employee:widget.employee,
         textEditingControllerList: widget.textEditingControllerList,
       ),
     );
