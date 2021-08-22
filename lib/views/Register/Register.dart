@@ -478,7 +478,19 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
-
+  pickDate() async {
+    DateTime datetime = await showDatePicker(
+      context: context,
+      firstDate: DateTime(DateTime.now().year - 70),
+      lastDate: DateTime(DateTime.now().year + 75),
+      initialDate: pickedDate,
+    );
+    if (date != null && datetime != null) {
+      setState(() {
+        pickedDate = datetime;
+      });
+    }
+  }
   showAlertDialog(BuildContext context, String titleInDialog, Function press) {
     showDialog(
       context: context,
@@ -500,19 +512,7 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  pickDate() async {
-    DateTime datetime = await showDatePicker(
-      context: context,
-      firstDate: DateTime(DateTime.now().year - 70),
-      lastDate: DateTime(DateTime.now().year + 75),
-      initialDate: pickedDate,
-    );
-    if (date != null && datetime != null) {
-      setState(() {
-        pickedDate = datetime;
-      });
-    }
-  }
+
 
   Container choiceSex() {
     return Container(

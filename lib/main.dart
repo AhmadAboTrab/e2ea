@@ -1,6 +1,5 @@
 import './localization/localizations_demo.dart';
 
-
 import './routes/customer_rout.dart';
 import './routes/route_names.dart';
 
@@ -52,7 +51,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'PharmacyApp',
       theme: ThemeData(
-        primaryColor: Colors.yellow,
+        primarySwatch: Colors.green,
       ),
       locale: this.locale,
       localizationsDelegates: [

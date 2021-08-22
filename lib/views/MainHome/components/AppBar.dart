@@ -5,6 +5,7 @@
 
 import 'package:e2ea/Controller/Api/deleteFromFirebase.dart';
 import 'package:e2ea/Widgets/AlertDialoge.dart';
+import 'package:e2ea/views/finincalReports/FinincalReports.dart';
 
 import '../../../models/employee.dart';
 
@@ -330,7 +331,9 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MonthlyInventory(),
+          builder: (context) => FinincalReports(
+            mediaQueryData: widget.mediaQueryData,
+          ),
         ),
       );
 
