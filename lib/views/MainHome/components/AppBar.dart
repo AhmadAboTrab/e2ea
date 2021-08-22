@@ -350,7 +350,7 @@ class _AppBarMainScreenState extends State<AppBarMainScreen>
         context,
         MaterialPageRoute(
           builder: (context) => 
-              QuantityIneventory(mediaQueryData: widget.mediaQueryData),
+              Register(),
         ),
       );
 
